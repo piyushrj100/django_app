@@ -2,6 +2,7 @@ from multiprocessing import context
 from django.shortcuts import render
 
 from django.http import HttpResponse
+from .models import Project
 
 projectList=[
     {
@@ -23,16 +24,15 @@ projectList=[
 ]
 
 def projects(request) :
+    projects =Project.objects.all()
     msg= 'Hello you are on the projects page'
     number=10
-    context ={'msg' : msg, 'number':number, 'projects':projectList}
+    context ={'projects' : projects}
     return render(request, 'projects/projects.html',context) #passing the message as dictionary to be used in the html template
 
 def project(request,pk) :
     # return HttpResponse('SINGLE PROJECT' + " " +str(pk))
-    projectObj=None
-    for i in projectList: 
-        if i['id'] ==pk:
-            projectObj=i
+    projectObj=Project.objects.get(id=pk)
+    # tags=projectObj.tags.all()
     return render(request,'projects/single-project.html', {'project' : projectObj} )
 
