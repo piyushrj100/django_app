@@ -1,5 +1,4 @@
-from multiprocessing import context
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Project
 from .forms import ProjectForm
@@ -10,20 +9,23 @@ def projects(request) :
     msg= 'Hello you are on the projects page'
     number=10
     context ={'projects' : projects}
-    return render(request, 'projects/projects.html',context) #passing the message as dictionary to be used in the html template
 
 def project(request,pk) :
     # return HttpResponse('SINGLE PROJECT' + " " +str(pk))
     projectObj=Project.objects.get(id=pk)
     # tags=projectObj.tags.all()
-    return render(request,'projects/single-project.html', {'project' : projectObj} )
+    return render(request,'projects/single-project.html', {'project' : projectObj} ) 
+    
 
 # def createProject(request) :
 #     context={}
 #     return render(request, "projects/project_form.html", context)
 
 def createProject(request) :
-    form = ProjectForm()
-    context={'form' : form} 
-    return render(request, "projects/project_form.html", context)
+    form = ProjectForm(request.POST)
+    if form.is_valid() :
+        form.save()
+        return redirect('projects')
+    # context={'form' : form} 
+    # return render(request, "projects/project_form.html", context)
 
