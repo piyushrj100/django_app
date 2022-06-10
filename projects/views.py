@@ -9,6 +9,7 @@ def projects(request) :
     msg= 'Hello you are on the projects page'
     number=10
     context ={'projects' : projects}
+    return render(request,'projects/projects.html',context)
 
 def project(request,pk) :
     # return HttpResponse('SINGLE PROJECT' + " " +str(pk))
@@ -22,10 +23,12 @@ def project(request,pk) :
 #     return render(request, "projects/project_form.html", context)
 
 def createProject(request) :
-    form = ProjectForm(request.POST)
-    if form.is_valid() :
-        form.save()
-        return redirect('projects')
-    # context={'form' : form} 
-    # return render(request, "projects/project_form.html", context)
+    form=ProjectForm()
+    if request.method=='POST' :
+        form = ProjectForm(request.POST)
+        if form.is_valid() :
+            form.save()
+            return redirect('projects')
+    context={'form' : form} 
+    return render(request, "projects/project_form.html", context)
 
