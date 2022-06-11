@@ -52,3 +52,4 @@ def deleteProject(request, pk) :
     return render(request, 'projects/delete_template.html',context)
 
 
+ 
