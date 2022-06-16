@@ -1,6 +1,29 @@
 # Create your views here.
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Profile
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import User
+
+def loginPage(request) :
+    if request.method=="POST" :
+        username=request.POST['username']
+        password=request.POST['password']
+
+        try :
+            user=User.objects.get(username=username)
+        except:
+            print("Username does not exist")
+        user=authenticate(request,username=username,password=password)
+
+        if user is not None :
+            login(request,user)
+            return redirect('profiles')
+        else :
+            print("username or password is incorrect")
+
+    return render(request,'users/login_register.html')
+
+
 def profiles(request) :
     return render(request, "users/profiles.html")
 
@@ -15,3 +38,4 @@ def userProfile(request,pk) :
     otherskills=profile.skill_set.filter(description="")
     context={'profile':profile,'topskills':topskills,'otherskills':otherskills}
     return render(request,'users/user-profile.html',context)
+
