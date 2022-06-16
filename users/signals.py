@@ -11,7 +11,8 @@ def profileUpdated(sender,instance,created,**kwargs) :
 
 @receiver(post_delete,sender=Profile)
 def deleteUser(sender,instance,**kwargs) :
-    print('Deleting user ....')
+    user=instance.user
+    user.delete()
 
 def createProfile(sender,instance,created,**kwargs) :
     if created :
