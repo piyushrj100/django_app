@@ -5,7 +5,9 @@ from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm   
 
+#Usercreation form for creating new users 
 def loginUser(request) :
     if request.method=="POST" :
         username=request.POST['username']
@@ -28,6 +30,12 @@ def logoutUser(request) :
     logout(request)
     messages.error(request, 'User logged out')
     return redirect('login')
+
+def registerUser(request) :
+    page='register'
+    form=UserCreationForm()
+    context={'page' : page, 'form' :form}
+    return render(request, 'users/login_register.html', context)
 
 
 def profiles(request) :
