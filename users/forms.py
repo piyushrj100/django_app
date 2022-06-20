@@ -21,5 +21,5 @@ class ProfileForm(ModelForm) :
     class Meta :
         model=Profile
         # fields="__all__"
-        fields=['name','email','username','bio','short_intro','profile_image','social_github','social_twitter',
+        fields=['name','email','username','bio','short_intro','location','profile_image','social_github','social_twitter',
         'social_linkedin','social_youtube','social_website']
