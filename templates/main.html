@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 {% load static %}
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 <html>
-    <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,29 +17,38 @@
     <link rel="stylesheet" href="{% static 'styles/app.css' %}" />
 
     <title>DevSearch - Connect with Developers!</title>
-    </head>
 
-    
-    <body>
-        <!-- <h1> This is the main template</h1> -->
-        
-        {% include 'navbar.html' %}
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-        </ul>
-{% endif %}
+</head>
 
-        {% block content %} 
+<body>
+    {% include 'navbar.html' %}
 
-        {% endblock content %}
 
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
-        <!-- <script src="" async defer></script> -->
-    </body>
+    <!-- {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %} -->
+
+    {% if messages %}
+
+    {% for message in messages %}
+    <div class="alert  alert--{{message.tags}}">
+        <p class="alert__message">{{message}}</p>
+        <button class="alert__close">x</button>
+    </div>
+
+    {% endfor %}
+
+    {% endif %}
+
+
+    {% block content %}
+
+    {% endblock content %}
+</body>
+<script src="{% static 'uikit/app.js' %}"></script>
+
 </html>
