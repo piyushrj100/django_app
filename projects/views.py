@@ -29,7 +29,7 @@ def projects(request) :
 
     msg= 'Hello you are on the projects page'
     number=10
-    context ={'projects' : projects, 'search_query' :search_query}
+    context ={'projects' : projects, 'search_query' :search_query, 'paginator' : paginator}
     return render(request,'projects/projects.html',context)
 
 def project(request,pk) :
