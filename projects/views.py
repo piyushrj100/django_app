@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Project
-from .forms import ProjectForm
+from .forms import ProjectForm, ReviewForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import Project, Tag
 from .forms import ProjectForm
 from .utils import searchProjects, paginateProjects
+from django.contrib import messages
 
 def projects(request) :
 
@@ -21,10 +22,28 @@ def projects(request) :
     return render(request,'projects/projects.html',context)
 
 def project(request,pk) :
+
     # return HttpResponse('SINGLE PROJECT' + " " +str(pk))
     projectObj=Project.objects.get(id=pk)
+    form=ReviewForm()
+
+    if request.method=='POST' :
+        form=ReviewForm(request.POST)
+        review=form.save(commit=False)
+        review.project=projectObj
+        review.owner=request.user.profile
+        review.save()
+        projectObj.getVoteCount
+        projectObj.reviewers
+
+        #update project vote count
+        messages.success(request, 'Your review was successfully submitted')
+        return redirect('project',pk=projectObj.id)
+
+
+
     # tags=projectObj.tags.all()
-    return render(request,'projects/single-project.html', {'project' : projectObj} ) 
+    return render(request,'projects/single-project.html', {'project' : projectObj,'form' : form} ) 
     
 
 # def createProject(request) :
