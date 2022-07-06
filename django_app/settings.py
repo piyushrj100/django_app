@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'users.apps.UsersConfig',
     'rest_framework',
+    'corsheaders',
 ]
 
 
@@ -93,6 +94,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     
 ]
 
@@ -160,6 +162,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 #email logic 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
