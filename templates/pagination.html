@@ -3,7 +3,7 @@
       <ul class="container">
         <!-- <li><a href="#" class="btn btn--disabled">&#10094; Prev</a></li> -->
         {% if queryset.has_previous %} 
-        <li><a href="{% if search_query %}?search_query={{search_query}}&{% else %}?{% endif %}?page={{queryset.previous_page_number}}" class = "btn page-link">&#10094; Prev</a></li>
+        <li><a href="{% if search_query %}?search_query={{search_query}}&{% else %}?{% endif %}page={{queryset.previous_page_number}}" class = "btn page-link">&#10094; Prev</a></li>
         {% endif %}
         {% for page in custom_range %} 
         {% if page == queryset.number %} 
@@ -16,7 +16,7 @@
         {% endfor %}
 
         {% if queryset.has_next %} 
-        <li><a href="{% if search_query %}?search_query={{search_query}}&{% else %}?{% endif %}?page={{queryset.next_page_number}}" class = "btn page-link">Next &#10095;</a></li>
+        <li><a href="{% if search_query %}?search_query={{search_query}}&{% else %}?{% endif %}page={{queryset.next_page_number}}" class = "btn page-link">Next &#10095;</a></li>
         {% endif %}
         <!-- <li><a href="#" class="btn">Next &#10095;</a></li> -->
       </ul>

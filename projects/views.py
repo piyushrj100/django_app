@@ -83,7 +83,7 @@ def updateProject(request,pk) :
                 tag,created = Tag.objects.get_or_create(name=tag)
                 project.tags.add(tag)
             return redirect('account')
-    context={'form':form}
+    context={'form':form,'project' : project}
     return render(request,"projects/project_form.html",context)
 
 @login_required(login_url="login")
