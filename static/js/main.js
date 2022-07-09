@@ -8,7 +8,7 @@ let tags= document.getElementsByClassName('project-tag')
             // console.log('TAG ID', tagId)
             // console.log('PROJECT ID',projectId)
 
-            fetch('http://127.0.0.1:8000/api/remove-tag/', {
+            fetch('https://piyush-django-app.herokuapp.com/api/remove-tag/', {
                 method: 'DELETE',
                 headers:{
                     'Content-Type' : 'application/json'
