@@ -4,8 +4,8 @@ from django.shortcuts import redirect, render
 from .models import Profile
 from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, ProfileForm, SkillForm,Skill,MessageForm
 from django.db.models import Q
 from .utils import searchProfiles,paginateProfiles
